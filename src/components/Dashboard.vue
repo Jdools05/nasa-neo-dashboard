@@ -1,5 +1,5 @@
 <template>
-    <v-navigation-drawer permanent location="right" :rail="!displaySidebar" width="500">
+    <v-navigation-drawer permanent location="right" :rail="!displaySidebar" width="400">
         <v-container v-if="displaySidebar && selectedObject">
             <h1>Name: {{ selectedObject.name }}</h1>
             <v-card-subtitle>ID: {{ selectedObject.id }}</v-card-subtitle>
@@ -43,7 +43,7 @@
     <!-- I want to make this expand to take up the extra space of the navigation drawer if the drawer is not being displayed -->
     <v-container fluid>
         <v-row>
-            <v-col v-for="item in getData" :key="item.id" cols="12" :md="displaySidebar ? 3 : 2">
+            <v-col v-if="getData" v-for="item in getData" :key="item.id" cols="12" :md="displaySidebar ? 3 : 2">
                 <v-card :style="item.is_potentially_hazardous_asteroid ? { border: '4px solid red' } : {}"
                     @click="manageSelectedObject(item)" :color="selectedObject === item ? 'indigo' : ''">
                     <v-card-title>{{ item.name }}</v-card-title>
@@ -51,6 +51,9 @@
                     <v-card-text>Diameter: {{ formatNumber(item.estimated_diameter.kilometers.estimated_diameter_max)
                     }}</v-card-text>
                 </v-card>
+            </v-col>
+            <v-col v-else cols="12" v-for="i in 12" :key="i" :md="displaySidebar ? 3 : 2">
+                <v-skeleton-loader type="card" height="200" />
             </v-col>
         </v-row>
     </v-container>

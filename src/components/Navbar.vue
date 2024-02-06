@@ -22,11 +22,6 @@
             </v-list>
         </v-navigation-drawer>
         <v-main>
-            <v-row v-if="data == null" alignment="center" justify="center">
-                <v-col cols="12" sm="8" md="4">
-                    <v-progress-circular indeterminate color="primary" size="128" />
-                </v-col>
-            </v-row>
             <Dashboard :data="data?.near_earth_objects[selectedDate]" />
         </v-main>
     </v-app>
